@@ -37,8 +37,8 @@ export default {
         await fetch("https://app.aicustomerservice.com/api/hooks/emails", {
             method: "POST",
             body: JSON.stringify({
-                'from': message.from,
-                'to': message.to,
+                'from': event.from,
+                'to': event.to,
                 // 'raw': rawEmail,
                 'body_html': parsedEmail.html,
                 'body_text': parsedEmail.text,
