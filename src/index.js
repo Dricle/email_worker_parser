@@ -39,10 +39,10 @@ export default {
             body: JSON.stringify({
                 'from': message.from,
                 'to': message.to,
-                'raw': rawEmail,
-                // 'body_html': parsedEmail.html,
-                // 'body_text': parsedEmail.text,
-                // 'attachments': parsedEmail.attachments
+                // 'raw': rawEmail,
+                'body_html': parsedEmail.html,
+                'body_text': parsedEmail.text,
+                'attachments': parsedEmail.attachments
             }),
             headers: {
                 "Content-Type": "application/json",
