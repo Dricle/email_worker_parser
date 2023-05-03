@@ -39,7 +39,7 @@ export default {
             body: JSON.stringify({
                 'from': event.from,
                 'to': event.to,
-                // 'raw': rawEmail,
+                'subject': parsedEmail.subject,
                 'body_html': parsedEmail.html,
                 'body_text': parsedEmail.text,
                 'attachments': parsedEmail.attachments
