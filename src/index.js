@@ -42,7 +42,6 @@ export default {
                 'subject': parsedEmail.subject,
                 'body_html': parsedEmail.html,
                 'body_text': parsedEmail.text,
-                'raw': rawEmail,
                 'attachments': parsedEmail.attachments
             }),
             headers: {
