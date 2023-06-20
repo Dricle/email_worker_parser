@@ -20,9 +20,11 @@ export default {
 		const rawEmail = await streamToArrayBuffer(event.raw, event.rawSize);
 		const parser = new PostalMime.default();
 		const parsedEmail = await parser.parse(rawEmail);
+
 		console.log("Mail subject: ", parsedEmail.subject);
 		console.log("HTML version of Email: ", parsedEmail.html);
 		console.log("Text version of Email: ", parsedEmail.text);
+
 		if (parsedEmail.attachments.length == 0) {
 			console.log("No attachments");
 		} else {
