@@ -47,10 +47,7 @@ export default {
 
         await fetch("https://app.aicustomerservice.com/api/hooks/emails", {
             method: "POST",
-            body: data,
-            headers: {
-                "Content-Type": "application/json",
-            }
+            body: data
         })
 	},
 };
