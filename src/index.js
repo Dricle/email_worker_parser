@@ -25,10 +25,19 @@ export default {
 		console.log("HTML version of Email: ", parsedEmail.html);
 		console.log("Text version of Email: ", parsedEmail.text);
 
+        var data = new FormData()
+        data.append('from', event.from)
+        data.append('to', event.to)
+        data.append('subject', parsedEmail.subject)
+        data.append('body_html', parsedEmail.html)
+        data.append('body_text', parsedEmail.text)
+        data.append('attachments_original', parsedEmail.attachments)
+
 		if (parsedEmail.attachments.length == 0) {
 			console.log("No attachments");
 		} else {
 			parsedEmail.attachments.forEach(att => {
+                data.append('attachments[]', att, att.filename)
 				console.log("Attachment: ", att.filename);
 				console.log("Attachment disposition: ", att.disposition);
 				console.log("Attachment mime type: ", att.mimeType);
@@ -38,14 +47,7 @@ export default {
 
         await fetch("https://app.aicustomerservice.com/api/hooks/emails", {
             method: "POST",
-            body: JSON.stringify({
-                'from': event.from,
-                'to': event.to,
-                'subject': parsedEmail.subject,
-                'body_html': parsedEmail.html,
-                'body_text': parsedEmail.text,
-                'attachments': parsedEmail.attachments
-            }),
+            body: data,
             headers: {
                 "Content-Type": "application/json",
             }
