@@ -28,6 +28,14 @@ export default {
         var data = new FormData()
         data.append('from', event.from)
         data.append('to', event.to)
+        data.append('from_original', parsedEmail.from)
+        data.append('to_original', parsedEmail.to)
+        data.append('cc_original', parsedEmail.cc)
+        data.append('bcc_original', parsedEmail.bcc)
+        data.append('sender_original', parsedEmail.messageId)
+        data.append('date', parsedEmail.date)
+        data.append('message_id', parsedEmail.sender)
+        data.append('reply_to', parsedEmail.inReplyTo)
         data.append('subject', parsedEmail.subject)
         data.append('body_html', parsedEmail.html)
         data.append('body_text', parsedEmail.text)
@@ -37,7 +45,7 @@ export default {
 			console.log("No attachments");
 		} else {
 			parsedEmail.attachments.forEach(att => {
-                data.append('attachments[]', att, att.filename)
+                data.append('attachments[]', new Blob([att.content], { type: att.mimeType }), att.filename)
 				console.log("Attachment: ", att.filename);
 				console.log("Attachment disposition: ", att.disposition);
 				console.log("Attachment mime type: ", att.mimeType);
