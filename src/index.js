@@ -25,7 +25,13 @@ export default {
 		console.log("HTML version of Email: ", parsedEmail.html);
 		console.log("Text version of Email: ", parsedEmail.text);
 
-        var data = new FormData()
+        // Decode HTML and text versions of the email using TextDecoder
+        const decoder = new TextDecoder('utf-8');
+        const decoded_html = decoder.decode(parsedEmail.html);
+        const decoded_text = decoder.decode(parsedEmail.text);
+
+
+        let data = new FormData()
         data.append('from', event.from)
         data.append('to', event.to)
         data.append('from_original', parsedEmail.from)
@@ -39,6 +45,8 @@ export default {
         data.append('subject', parsedEmail.subject)
         data.append('body_html', parsedEmail.html)
         data.append('body_text', parsedEmail.text)
+        data.append('decoded_body_html', decoded_html)
+        data.append('decoded_body_text', decoded_text)
         data.append('attachments_original', parsedEmail.attachments)
 
 		if (parsedEmail.attachments.length == 0) {
